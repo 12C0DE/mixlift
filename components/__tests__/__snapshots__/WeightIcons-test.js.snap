@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+      },
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "height": 100,
+        "justifyContent": "center",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#fff",
+        },
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row-reverse",
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#fff",
+        },
+        undefined,
+      ]
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      style={
+        Object {
+          "borderColor": "#06282c",
+          "borderRadius": 5,
+          "borderWidth": 2,
+          "fontSize": 50,
+          "height": 70,
+          "textAlign": "center",
+          "width": 120,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#fff",
+        },
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        },
+      ]
+    }
+  />
+</View>
+`;
