@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { View, Text } from "../components/Themed";
 import { Image, StyleSheet, TextInput } from "react-native";
 import uuid from "react-uuid";
@@ -14,7 +14,12 @@ const enum WeightLbs {
   _2half = 5,
 }
 
-export const WeightIcons = ({ weight }: any) => {
+type weightType = {
+  weight: number;
+  settingWeight: (value) => void;
+};
+
+export const WeightIcons = ({ weight, settingWeight }: weightType) => {
   const [forty5s, setForty5s] = useState<number[]>([]);
   const [thirty5s, setThirty5s] = useState<number[]>([]);
   const [twenty5s, setTwenty5s] = useState<number[]>([]);
@@ -23,11 +28,15 @@ export const WeightIcons = ({ weight }: any) => {
   const [twoHalf, setTwoHalf] = useState<number[]>([]);
   const [liftWeight, setLiftWeight] = useState<number>(weight);
 
-  useEffect(() => {
-    // const timeoutId = setTimeout(() => figureWeight(liftWeight), 200);
-    // return () => clearTimeout(timeoutId);
+  useLayoutEffect(() => {
     figureWeight(liftWeight);
-  }, [liftWeight]);
+    setLiftWeight(weight);
+  }, [liftWeight, weight]);
+
+  const liftWeightHandler = (value: number) => {
+    setLiftWeight(value);
+    settingWeight(value);
+  };
 
   const figureWeight = (lWeight) => {
     let arrWeight: number = 0;
@@ -35,11 +44,14 @@ export const WeightIcons = ({ weight }: any) => {
       return;
     }
 
-    arrWeight = Math.floor(lWeight / WeightLbs._45s);
+    const weight = lWeight >= 135 ? lWeight - 45 : lWeight;
+
+    //TODO: add logic so that if the weight is over 135 (assuming this is barbell weight, remove 45 lbs to account for the bar, and so that extra weights dont appear)
+
+    arrWeight = Math.floor(weight / WeightLbs._45s);
     setForty5s(new Array(Math.floor(arrWeight)).fill(45));
 
-    // forty5s.map((w) => console.log("testing"));
-    let remainder = lWeight % WeightLbs._45s;
+    let remainder = weight % WeightLbs._45s;
 
     arrWeight = Math.floor(remainder / WeightLbs._35s);
     setThirty5s(new Array(arrWeight).fill(35));
@@ -92,7 +104,12 @@ export const WeightIcons = ({ weight }: any) => {
           />
         );
       case 5:
-        // return <Image source={require("../assets/images/weightIco_5.png")} />
+        return (
+          <Image
+            key={uuid()}
+            source={require("../assets/images/weightIco_10.png")}
+          />
+        );
         break;
       case 2.5:
         // return <Image source={require("../assets/images/weightIco_45.png")} />
@@ -109,15 +126,16 @@ export const WeightIcons = ({ weight }: any) => {
         {thirty5s.map((f, index) => createWeights(f, index))}
         {twenty5s.map((f, index) => createWeights(f, index))}
         {tens.map((f, index) => createWeights(f, index))}
+        {fives.map((f, index) => createWeights(f, index))}
       </View>
       <View>
         <TextInput
-          keyboardType="numeric"
+          keyboardType="number-pad"
           style={styles.weightInput}
-          onChangeText={(wght) => setLiftWeight(+wght)}
+          onChangeText={(wght) => liftWeightHandler(+wght)}
           maxLength={3}
         >
-          {liftWeight}
+          {weight}
         </TextInput>
       </View>
       <View style={styles.weightRowRev}>
@@ -125,7 +143,7 @@ export const WeightIcons = ({ weight }: any) => {
         {thirty5s.map((f, index) => createWeights(f, index))}
         {twenty5s.map((f, index) => createWeights(f, index))}
         {tens.map((f, index) => createWeights(f, index))}
-        {liftWeight < 5 && null}
+        {fives.map((f, index) => createWeights(f, index))}
       </View>
     </View>
   );
@@ -141,13 +159,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "italic",
   },
-  weight: {
-    // height: 25,
-    // width: 7,
-    aspectRatio: 135 / 76,
-    justifyContent: "center",
-    objectFit: "contain",
-  },
   weightInput: {
     borderColor: "#06282c",
     borderWidth: 2,
@@ -160,7 +171,6 @@ const styles = StyleSheet.create({
   weightContainer: {
     height: 100,
     flexDirection: "row",
-    // width: "50%",
     justifyContent: "center",
     alignItems: "center",
   },
