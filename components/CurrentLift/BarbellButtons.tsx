@@ -21,6 +21,8 @@ export const BarbellButton = ({ weight, weightAmount, weightHandler }) => {
     }
   };
 
+  //   const currentWeight = weightImage();
+
   return (
     <GestureRecognizer
       onSwipeUp={() => weightHandler(weight + weightAmount)}
