@@ -3,20 +3,22 @@ import { View } from "../../components/Themed";
 import {
   Pressable,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { RootTabScreenProps } from "../../types";
 import { WeightIcons } from "../../components/WeightIcons";
 import { BarbellButton } from "../../components/CurrentLift/BarbellButtons";
-import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { styles } from "./CurrentLift_Styles";
 import { LiftType, SetType } from "../../types/LiftType";
 import { SwipeArrow } from "../../components/CurrentLift/SwipeArrow";
-
+import uuid from "react-uuid";
 interface WeightDataProps {
   name: string;
   lastLiftAmount: number;
@@ -38,6 +40,7 @@ export const CurrentLift = ({
   const [sets, setSets] = useState<SetsType>({ totalSets: 4, currentSet: 1 });
   const [lift, setLift] = useState<LiftType>({
     name: "",
+    id: "",
     date: new Date(),
     sets: 0,
   });
@@ -71,6 +74,7 @@ export const CurrentLift = ({
       // * add the current lift at index 1 (no lifts currently exist)
       const currLift: LiftType = {
         name: weightData?.name ?? "Bench Press",
+        id: uuid(),
         date: new Date(),
         sets: [{ reps: reps, weight: weight } as SetType],
       };
@@ -108,8 +112,24 @@ export const CurrentLift = ({
     }
   };
 
+  const onScroll = (event) => {
+    const { navigation } = event.props;
+    const currentOffset = event.nativeEvent.contentOffset.y;
+    const dif = currentOffset - (event.offset || 0);
+
+    if (dif < 0) {
+      navigation.setParams({ showTabBar: true });
+    } else {
+      navigation.setParams({ showTabBar: false });
+    }
+    //console.log('dif=',dif);
+
+    event.offset = currentOffset;
+  };
+
   return (
     <>
+      {/* <ScrollView> */}
       <View style={styles.container}>
         {/* //TODO: maybe make the title swipeable to get to the other workouts so this would make the prev & next buttons only used on changing sets */}
 
@@ -217,6 +237,13 @@ export const CurrentLift = ({
             </Text>
           </TouchableOpacity>
         </View>
+        {/* <TouchableOpacity>
+          <View style={styles.timerContainer}>
+            <Text style={styles.timerBtn}>Add</Text>
+            <Ionicons name="timer-outline" size={40} color={"#555555"} />
+            <Text style={styles.timerBtn}>Timer</Text>
+          </View>
+        </TouchableOpacity> */}
 
         <View style={styles.navBtnView}>
           <TouchableOpacity
@@ -250,6 +277,7 @@ export const CurrentLift = ({
           Quit Workout?
         </Text>
       </TouchableOpacity>
+      {/* </ScrollView> */}
     </>
   );
 };

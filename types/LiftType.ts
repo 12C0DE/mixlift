@@ -1,5 +1,6 @@
 export type LiftType = {
   name: string;
+  id: string;
   date: Date;
   sets: SetType[] | 0;
 };

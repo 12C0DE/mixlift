@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -30,6 +30,7 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { TimerModal } from "../components/CurrentLift/TimerModal/TimerModal";
 
 export default function Navigation({
   colorScheme,
@@ -67,6 +68,13 @@ function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="TimerModal"
+          component={TimerModal}
+          options={{ title: "Add Timer" }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -127,9 +135,8 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="CurrentLift"
         component={CurrentLift}
-        options={{
+        options={({ navigation }: RootTabScreenProps<"CurrentLift">) => ({
           title: "Current Lift",
-          // tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="weight-lifter"
@@ -137,7 +144,22 @@ function BottomTabNavigator() {
               color={color}
             />
           ),
-        }}
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate("TimerModal")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <Ionicons
+                name="timer-outline"
+                size={30}
+                color="black"
+                style={{ marginRight: 12 }}
+              />
+            </Pressable>
+          ),
+        })}
       />
     </BottomTab.Navigator>
   );

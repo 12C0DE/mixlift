@@ -13,12 +13,12 @@ export const styles = StyleSheet.create({
   boxOf: {},
   container: {
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-evenly",
   },
   quitBtn: {
     width: "100%",
     borderTopWidth: 2,
-    borderTopColor: "#FFFA96F0",
+    borderTopColor: "#9E9B59F0",
     backgroundColor: "#434341F0",
     padding: 16,
   },
@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontWeight: "bold",
     fontSize: 24,
-    marginBottom: 6,
   },
   navBtn: {
     fontWeight: "bold",
@@ -38,8 +37,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 3,
     justifyContent: "space-between",
-    alignContent: "flex-end",
-    // height: 100,
+    alignItems: "center",
   },
   navBtnView: {
     display: "flex",
@@ -56,7 +54,7 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: 25,
+    marginBottom: "5%",
   },
   setsContainer: {
     display: "flex",
@@ -75,6 +73,16 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
+  },
+  timerContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 4,
+  },
+  timerBtn: {
+    color: "#555555",
+    fontWeight: "500",
   },
   title: {
     fontSize: 34,
@@ -98,5 +106,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "nowrap",
     alignItems: "center",
+    flexShrink: 1,
   },
 });
