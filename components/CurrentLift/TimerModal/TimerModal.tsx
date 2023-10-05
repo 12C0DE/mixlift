@@ -32,7 +32,6 @@ export const TimerModal = () => {
   };
 
   const pauseTimer = () => {
-    console.log("in pauseTimer");
     setTimerStatus(
       timerStatus === TimerStatus.PAUSED
         ? TimerStatus.PLAYING
@@ -69,11 +68,6 @@ export const TimerModal = () => {
       }, secToMs);
     } else {
       clearInterval(timerID);
-
-      if (timerStatus === TimerStatus.STOPPED) {
-        console.log("time stopped");
-        setTimesUp(true);
-      }
     }
 
     return () => {
@@ -144,7 +138,7 @@ export const TimerModal = () => {
             <FontAwesome
               name="circle-thin"
               size={125}
-              color="black"
+              color="#DADADA"
               style={styles.btn}
             />
             <Text style={styles.btnText}>Reset</Text>
@@ -161,7 +155,7 @@ export const TimerModal = () => {
               <FontAwesome
                 name="circle-thin"
                 size={120}
-                color="black"
+                color="#4F4F4F"
                 style={styles.btn}
               />
               <Text style={styles.btnText}>Start</Text>
@@ -174,7 +168,7 @@ export const TimerModal = () => {
               <FontAwesome
                 name="circle-thin"
                 size={120}
-                color="black"
+                color="#4F4F4F"
                 style={styles.btn}
               />
               <Text style={styles.btnText}>Pause</Text>

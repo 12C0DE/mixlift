@@ -112,21 +112,6 @@ export const CurrentLift = ({
     }
   };
 
-  const onScroll = (event) => {
-    const { navigation } = event.props;
-    const currentOffset = event.nativeEvent.contentOffset.y;
-    const dif = currentOffset - (event.offset || 0);
-
-    if (dif < 0) {
-      navigation.setParams({ showTabBar: true });
-    } else {
-      navigation.setParams({ showTabBar: false });
-    }
-    //console.log('dif=',dif);
-
-    event.offset = currentOffset;
-  };
-
   return (
     <>
       {/* <ScrollView> */}
