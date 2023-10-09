@@ -1,20 +1,11 @@
 import React, { useState } from "react";
 import { View } from "../../components/Themed";
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  useColorScheme,
-} from "react-native";
+import { Text, TextInput, TouchableOpacity } from "react-native";
 import { Button } from "react-native-elements";
 import { RootTabScreenProps } from "../../types";
 import { WeightIcons } from "../../components/WeightIcons";
 import { BarbellButton } from "../../components/CurrentLift/BarbellButtons";
-import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { styles } from "./CurrentLift_Styles";
 import { LiftType, SetType } from "../../types/LiftType";
 import { SwipeArrow } from "../../components/CurrentLift/SwipeArrow";
@@ -102,7 +93,6 @@ export const CurrentLift = ({
         const liftSets: SetType[] | 0 = lift?.sets ?? 0;
 
         liftSets && liftSets.push(newSet);
-
         lift && setLift({ ...lift, sets: liftSets });
       }
 
@@ -114,12 +104,12 @@ export const CurrentLift = ({
 
   return (
     <>
-      {/* <ScrollView> */}
-      <View style={styles.container}>
-        {/* //TODO: maybe make the title swipeable to get to the other workouts so this would make the prev & next buttons only used on changing sets */}
+      <View>
+        {/* //TODO: maybe make the title swipeable to get to the other workouts so this would make the prev & next buttons only used on changing sets
+         */}
 
         <Text style={styles.title}>{weightData?.name ?? "Bench Press"}</Text>
-        <View style={styles.container}>
+        <View style={{ alignItems: "center" }}>
           <WeightIcons weight={weight} settingWeight={weightHandler} />
           <View
             style={{
@@ -133,12 +123,12 @@ export const CurrentLift = ({
             </Text>
           </View>
         </View>
-        <View style={styles.swipeRow}>
+        {/* <View style={styles.swipeRow}>
           <SwipeArrow name="keyboard-arrow-up" />
           <SwipeArrow name="keyboard-arrow-up" />
           <SwipeArrow name="keyboard-arrow-up" />
-        </View>
-        <View style={styles.weightsRow}>
+        </View> */}
+        <View style={[styles.weightsRow, { marginBottom: 0 }]}>
           <BarbellButton
             weight={weight}
             weightAmount={5}
@@ -146,12 +136,20 @@ export const CurrentLift = ({
           />
           <BarbellButton
             weight={weight}
-            weightAmount={25}
+            weightAmount={45}
             weightHandler={weightHandler}
           />
+
           <BarbellButton
             weight={weight}
-            weightAmount={45}
+            weightAmount={10}
+            weightHandler={weightHandler}
+          />
+        </View>
+        <View style={styles.weightsRow}>
+          <BarbellButton
+            weight={weight}
+            weightAmount={25}
             weightHandler={weightHandler}
           />
           <BarbellButton
@@ -159,17 +157,12 @@ export const CurrentLift = ({
             weightAmount={35}
             weightHandler={weightHandler}
           />
-          <BarbellButton
-            weight={weight}
-            weightAmount={10}
-            weightHandler={weightHandler}
-          />
         </View>
-        <View style={styles.swipeRow}>
+        {/* <View style={[styles.swipeRow, { paddingTop: -6 }]}>
           <SwipeArrow name="keyboard-arrow-down" />
           <SwipeArrow name="keyboard-arrow-down" />
           <SwipeArrow name="keyboard-arrow-down" />
-        </View>
+        </View> */}
         <View style={styles.sets}>
           <Text style={styles.liftText}>SETS</Text>
           <View style={styles.setsContainer}>
@@ -222,14 +215,6 @@ export const CurrentLift = ({
             </Text>
           </TouchableOpacity>
         </View>
-        {/* <TouchableOpacity>
-          <View style={styles.timerContainer}>
-            <Text style={styles.timerBtn}>Add</Text>
-            <Ionicons name="timer-outline" size={40} color={"#555555"} />
-            <Text style={styles.timerBtn}>Timer</Text>
-          </View>
-        </TouchableOpacity> */}
-
         <View style={styles.navBtnView}>
           <TouchableOpacity
             style={styles.touchableNavBtn}
@@ -262,7 +247,6 @@ export const CurrentLift = ({
           Quit Workout?
         </Text>
       </TouchableOpacity>
-      {/* </ScrollView> */}
     </>
   );
 };

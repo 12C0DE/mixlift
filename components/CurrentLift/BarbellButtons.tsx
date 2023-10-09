@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "../Themed";
-import { StyleSheet, Image } from "react-native";
+import { Image } from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
 
 export const BarbellButton = ({ weight, weightAmount, weightHandler }) => {
@@ -28,16 +28,7 @@ export const BarbellButton = ({ weight, weightAmount, weightHandler }) => {
       onSwipeUp={() => weightHandler(weight + weightAmount)}
       onSwipeDown={() => weightHandler(weight - weightAmount)}
     >
-      <View style={styles.barbell}>{weightImage()}</View>
+      <View>{weightImage()}</View>
     </GestureRecognizer>
   );
 };
-
-const styles = StyleSheet.create({
-  barbell: {
-    // alignItems: "center",
-    // justifyContent: "space-between",
-    // width: "auto",
-    // height: "auto",
-  },
-});

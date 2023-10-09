@@ -55,7 +55,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        contentStyle: {
+          backgroundColor: "#fff",
+        },
+      }}
+    >
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}

@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
   navButtonsContainer: {
     display: "flex",
     flexDirection: "row",
-    flex: 1,
     marginHorizontal: 3,
     justifyContent: "space-between",
     alignItems: "center",
@@ -54,7 +53,7 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: "5%",
+    marginBottom: "3%",
   },
   setsContainer: {
     display: "flex",
@@ -68,6 +67,7 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
     color: "gray",
     marginTop: -10,
+    marginBottom: 2,
   },
   swipeRow: {
     display: "flex",
@@ -106,6 +106,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "nowrap",
     alignItems: "center",
-    flexShrink: 1,
+    justifyContent: "space-evenly",
   },
 });

@@ -6,8 +6,8 @@ import { styles } from "./DidntLift_Styles";
 export const DidntLift = () => {
   return (
     <View style={styles.container}>
-      <Text>Didnt lift</Text>
-      <MaterialCommunityIcons name="emoticon-frown" size={24} color="black" />
+      <Text style={styles.text}>Didn't lift...</Text>
+      <MaterialCommunityIcons name="emoticon-frown" size={60} color="black" />
     </View>
   );
 };
