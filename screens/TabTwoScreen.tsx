@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { History } from "../components/History/History";
+import { History } from "./History/History";
 import { Text, View } from "../components/Themed";
 
 export default function TabTwoScreen() {

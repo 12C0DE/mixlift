@@ -4,7 +4,7 @@ export const lift = {
     {
       name: "Bench Press",
       id: "13sdf",
-      date: "2023-10-05",
+      date: "2023-12-16",
       sets: [
         {
           reps: 5,
@@ -145,12 +145,12 @@ export const lift = {
 export const dayLifts = {
   dayLifts: [
     {
-      date: "2023-10-05",
+      date: "2023-12-18",
       name: "chest & back",
     },
 
     {
-      date: "2023-10-04",
+      date: "2023-12-19",
       name: "legs",
     },
   ],

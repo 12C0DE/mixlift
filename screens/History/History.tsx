@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
 import { Text } from "react-native";
 import { Agenda, DateData } from "react-native-calendars";
-import { View } from "../Themed";
+import { View } from "../../components/Themed";
 import { lift } from "../../mocks/lift";
-import { DidntLift } from "./DidntLift/DidntLift";
+import { DidntLift } from "../../components/History/DidntLift/DidntLift";
 import { MarkedDates } from "react-native-calendars/src/types";
-import { WorkoutItem } from "./WorkoutItem/WorkoutItem";
+import { WorkoutItem } from "../../components/History/WorkoutItem/WorkoutItem";
 import { styles } from "./History_Styles";
 
 const timeToString = (time) => {
