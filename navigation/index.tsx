@@ -20,17 +20,14 @@ import { ColorSchemeName, Pressable } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
-import { CurrentLift } from "../screens/CurrentLift/CurrentLift";
+import { CurrentLift, History, Programs } from "../screens/index";
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import { TimerModal } from "../components/CurrentLift/TimerModal/TimerModal";
+import { TimerModal } from "../components/index";
 
 export default function Navigation({
   colorScheme,
@@ -67,11 +64,11 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
-      />
+      /> */}
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -97,15 +94,15 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="CurrentLift"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
+        name="Programs"
+        component={Programs}
+        options={({ navigation }: RootTabScreenProps<"Programs">) => ({
           title: "Programs",
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons name="notebook" size={24} color={color} />
@@ -128,8 +125,8 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="History"
+        component={History}
         options={{
           title: "History",
           tabBarIcon: ({ color }) => (

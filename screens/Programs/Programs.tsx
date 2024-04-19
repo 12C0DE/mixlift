@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button, FlatList } from "react-native";
-import { ProgramTile } from "../../components/Programs/ProgramTile";
+import { RootTabScreenProps } from "../../types";
+import { AddButton, ProgramTile } from "../../components";
+import { styles } from "./Programs_Styles";
 
 // Function to fetch programs from the server
 const fetchPrograms = async () => {
   // Implement your logic to fetch programs from the server
 };
 
-export const Programs = () => {
+export const Programs = ({ navigation }: RootTabScreenProps<"Programs">) => {
   const [programs, setPrograms] = useState([
     { id: 1, name: "Program 1" },
     { id: 2, name: "Program 2" },
@@ -29,42 +31,35 @@ export const Programs = () => {
 
   return (
     <View key={Math.random()} style={{ flex: 1, alignItems: "center" }}>
-      <Text>Programs</Text>
-
-      <Button title="Create Program" onPress={createProgram} />
-
+      {/* <View style={styles.titleContainer}>
+      <Text style={styles.titleText}>Programs</Text>
+    </View> */}
       {/* <FlatList
                 data={programs}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View>
-                        <Text>{item.name}</Text>
-                        <Button title="Edit" onPress={() => editProgram(item.id)} />
-                    </View>
+                  <View>
+                  <Text>{item.name}</Text>
+                  <Button title="Edit" onPress={() => editProgram(item.id)} />
+                  </View>
                 )}
-            /> */}
-      {/* <ProgramTile text="Create Program" icon="create" /> */}
+              /> */}
 
-      <View
-        style={{
-          flexDirection: "row",
-          flexWrap: "wrap",
-          gap: 10,
-
-          //   justifyContent: "center",
-          alignItems: "center",
-          alignSelf: "center",
-        }}
-      >
-        <ProgramTile text="Chest and triceps part 2" icon="barbell" />
-        <ProgramTile text="Chest" icon="barbell" />
-        <ProgramTile text="Chest" icon="barbell" />
-      </View>
-      {/* <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 20 }}>
-        <ProgramTile text="Chest and triceps part 2" icon="barbell" />
-        <ProgramTile text="Chest" icon="barbell" />
-        <ProgramTile text="Chest" icon="barbell" />
-      </View> */}
+      {programs.length < 1 ? (
+        <ProgramTile text="Create Program" icon="create" />
+      ) : (
+        <>
+          <View style={styles.programContainer}>
+            <ProgramTile
+              text="Chest and triceps part 2"
+              icon="fitness-center"
+            />
+            <ProgramTile text="Chest" icon="fitness-center" />
+            <ProgramTile text="Legs" icon="fitness-center" />
+          </View>
+          <AddButton />
+        </>
+      )}
     </View>
   );
 };

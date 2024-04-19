@@ -15,14 +15,14 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Programs: {
             screens: {
-              TabOneScreen: "one",
+              Programs: "one",
             },
           },
-          TabTwo: {
+          History: {
             screens: {
-              TabTwoScreen: "two",
+              History: "two",
             },
           },
           CurrentLift: {
@@ -33,7 +33,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         },
       },
       Modal: "modal",
-      NotFound: "*",
+      // NotFound: "*",
     },
   },
 };

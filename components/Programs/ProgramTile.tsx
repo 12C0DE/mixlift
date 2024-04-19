@@ -18,7 +18,7 @@ export const ProgramTile: React.FC<ProgramTileProps> = ({ text, icon }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#000",
     borderRadius: 8,
