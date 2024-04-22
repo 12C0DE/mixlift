@@ -122,7 +122,6 @@ export const CreateProgram = () => {
         />
         <MaterialCommunityIcons name="minus-thick" size={24} color="black" />
       </View>
-      {/* ...existing code... */}
       <Button title="Save" onPress={addWorkout} />
     </View>
   );

@@ -4,9 +4,6 @@ export const styles = StyleSheet.create({
   deleteContainer: {
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: "black",
-    // justifyContent: "center",
-    // flex: 1,
   },
   gridContainer: {
     flexDirection: "row",
