@@ -9,7 +9,8 @@ const fetchPrograms = async () => {
   // Implement your logic to fetch programs from the server
 };
 
-export const Programs = ({ navigation }: RootTabScreenProps<"Programs">) => {
+export const Programs = ({ navigation }) => {
+  // export const Programs = ({ navigation }: RootTabScreenProps<"Programs">) => {
   const [programs, setPrograms] = useState([
     { id: 1, name: "Program 1" },
     { id: 2, name: "Program 2" },
@@ -23,6 +24,7 @@ export const Programs = ({ navigation }: RootTabScreenProps<"Programs">) => {
 
   const createProgram = () => {
     // Implement your logic to create a new program
+    navigation.navigate("CreateProgram");
   };
 
   const editProgram = (programId) => {
@@ -57,7 +59,7 @@ export const Programs = ({ navigation }: RootTabScreenProps<"Programs">) => {
             <ProgramTile text="Chest" icon="fitness-center" />
             <ProgramTile text="Legs" icon="fitness-center" />
           </View>
-          <AddButton />
+          <AddButton mainAction={createProgram} />
         </>
       )}
     </View>

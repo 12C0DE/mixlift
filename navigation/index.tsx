@@ -20,7 +20,8 @@ import { ColorSchemeName, Pressable } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
-import { CurrentLift, History, Programs } from "../screens/index";
+import { CurrentLift, History } from "../screens/index";
+import { ProgramsStackScreen } from "./ProgramsStack";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -94,15 +95,15 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="CurrentLift"
+      initialRouteName="ProgramsTab"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="Programs"
-        component={Programs}
-        options={({ navigation }: RootTabScreenProps<"Programs">) => ({
+        name="ProgramsTab"
+        component={ProgramsStackScreen}
+        options={({ navigation }: RootTabScreenProps<"ProgramsTab">) => ({
           title: "Programs",
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons name="notebook" size={24} color={color} />
@@ -130,7 +131,6 @@ function BottomTabNavigator() {
         options={{
           title: "History",
           tabBarIcon: ({ color }) => (
-            // <TabBarIcon name="calendar" color={color} />
             <AntDesign name="calendar" size={24} color={color} />
           ),
         }}

@@ -8,6 +8,7 @@ import { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 
 import { RootStackParamList } from "../types";
+import { CreateProgram } from "../screens";
 
 const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL("/")],
@@ -17,17 +18,18 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Programs: {
             screens: {
-              Programs: "one",
+              Programs: "Programs",
+              CreateProgram: "CreateProgram",
             },
           },
           History: {
             screens: {
-              History: "two",
+              History: "History",
             },
           },
           CurrentLift: {
             screens: {
-              CurrentLift: "three",
+              CurrentLift: "CurrentLift",
             },
           },
         },
