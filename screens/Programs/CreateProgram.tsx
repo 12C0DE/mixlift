@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, FlatList, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  FlatList,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import uuid from "react-native-uuid";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { workoutProgram } from "../../mocks";
 import { WorkoutType } from "../../types/index";
 import { Swipeable } from "react-native-gesture-handler";
 import { styles } from "./CreateProgram_Styles";
+import { ProgramsModal } from "../../components/index";
 
-export const CreateProgram = () => {
+export const CreateProgram = ({ navigation }) => {
   const [programName, setProgramName] = useState("");
   // const [program, setProgram] = useState<Workout>({} as Workout);
   const [workouts, setWorkouts] = useState<WorkoutType[]>(workoutProgram);
+  const [savedWO, setSavedWO] = useState(false);
 
   const addWorkout = () => {
     const newWorkout: WorkoutType = {
@@ -38,9 +47,18 @@ export const CreateProgram = () => {
 
     return (
       <View style={styles.deleteContainer}>
-        <MaterialCommunityIcons name="trash-can" size={32} color="red" />
+        <Ionicons name="trash-bin" size={32} color="red" />
       </View>
     );
+  };
+
+  const saveWorkout = () => {
+    setSavedWO(true);
+  };
+
+  const navigateToLift = () => {
+    setSavedWO(false);
+    navigation.navigate("CurrentLift");
   };
 
   return (
@@ -59,11 +77,11 @@ export const CreateProgram = () => {
           keyExtractor={(item: WorkoutType) => item.id.toString()}
           renderItem={({ item }) => (
             <Swipeable
-              dragOffsetFromRightEdge={80}
+              dragOffsetFromRightEdge={70}
+              friction={2}
               onSwipeableOpen={() => {
                 deleteWorkout(item.id);
               }}
-              // dragOffsetFromLeftEdge={90}
               renderRightActions={(progress, dragX) =>
                 rightSwipe(progress, dragX)
               }
@@ -90,6 +108,9 @@ export const CreateProgram = () => {
                   keyboardType="numeric"
                   maxLength={3}
                   onChangeText={(text) => {
+                    if (text === "") {
+                      text = "0";
+                    }
                     const updatedWorkouts = workouts.map((workout) => {
                       if (workout.id === item.id) {
                         return { ...workout, sets: parseInt(text) };
@@ -106,6 +127,9 @@ export const CreateProgram = () => {
                   keyboardType="numeric"
                   maxLength={3}
                   onChangeText={(text) => {
+                    if (text === "") {
+                      text = "0";
+                    }
                     const updatedWorkouts = workouts.map((workout) => {
                       if (workout.id === item.id) {
                         return { ...workout, reps: parseInt(text) };
@@ -120,9 +144,23 @@ export const CreateProgram = () => {
             </Swipeable>
           )}
         />
-        <MaterialCommunityIcons name="minus-thick" size={24} color="black" />
+        <TouchableOpacity onPress={addWorkout}>
+          <Ionicons
+            name="add-circle"
+            size={40}
+            color="black"
+            style={{ alignSelf: "flex-end", padding: 10 }}
+          />
+        </TouchableOpacity>
       </View>
-      <Button title="Save" onPress={addWorkout} />
+      <Button title="Save" onPress={() => saveWorkout()} />
+      {savedWO && (
+        <ProgramsModal
+          savedWO={savedWO}
+          startWorkout={navigateToLift}
+          editWO={() => setSavedWO(false)}
+        />
+      )}
     </View>
   );
 };

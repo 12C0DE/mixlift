@@ -19,7 +19,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           Programs: {
             screens: {
               Programs: "Programs",
-              CreateProgram: "CreateProgram",
+              // CreateProgram: "CreateProgram",
             },
           },
           History: {
