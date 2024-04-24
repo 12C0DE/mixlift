@@ -1,7 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Programs, CreateProgram } from "../screens/index";
-import { ProgramsModal } from "../components";
 
 const ProgramsStack = createStackNavigator();
 
@@ -19,12 +18,6 @@ export const ProgramsStackScreen = () => {
         component={CreateProgram}
         options={{ headerShown: false }}
       />
-      {/* <ProgramsStack.Screen
-        name="ProgramsModal"
-        navigationKey="Programs"
-        component={<ProgramsModal savedWO={false} startWorkout={}/>}
-        options={{ headerShown: false }}
-      /> */}
     </ProgramsStack.Navigator>
   );
 };

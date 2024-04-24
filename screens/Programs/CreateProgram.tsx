@@ -37,7 +37,7 @@ export const CreateProgram = ({ navigation }) => {
   };
 
   const rightSwipe = (progress, dragX) => {
-    const swipeThreshold = 60; // Set your own value
+    const swipeThreshold = 60;
 
     const scale = dragX.interpolate({
       inputRange: [-swipeThreshold, 0],
