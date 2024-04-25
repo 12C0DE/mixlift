@@ -15,11 +15,11 @@ export const styles = StyleSheet.create({
   },
   gradientArea: {
     width: "100%",
-    height: 200,
+    height: 100,
     backgroundColor: "#000",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundImage: "linear-gradient(to bottom, #000, #eee)",
+    // backgroundImage: "linear-gradient(to bottom, #000, #eee)",
   },
 });

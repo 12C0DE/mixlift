@@ -12,8 +12,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { workoutProgram } from "../../mocks";
 import { WorkoutType } from "../../types/index";
 import { Swipeable } from "react-native-gesture-handler";
-import { styles } from "./CreateProgram_Styles";
 import { ProgramsModal } from "../../components/index";
+import { insertProgram } from "../../db/database";
+import { styles } from "./CreateProgram_Styles";
 
 export const CreateProgram = ({ navigation }) => {
   const [programName, setProgramName] = useState("");
@@ -53,6 +54,9 @@ export const CreateProgram = ({ navigation }) => {
   };
 
   const saveWorkout = () => {
+    //?what about the workout just created?
+    insertProgram("NAME OF WORKOUT");
+
     setSavedWO(true);
   };
 

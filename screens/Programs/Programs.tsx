@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { programs } from "../../mocks/index";
 import { AddButton, ProgramTile } from "../../components";
+import { getPrograms } from "../../db/database";
 import { styles } from "./Programs_Styles";
 
 // Function to fetch programs from the server

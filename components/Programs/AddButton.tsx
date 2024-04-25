@@ -15,7 +15,15 @@ export const AddButton = ({ mainAction }) => {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 16,
+    bottom: 36,
     right: 16,
+    zIndex: 20,
+    backgroundColor: "white",
+    padding: 1,
+    paddingLeft: 4,
+    borderRadius: 40,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
