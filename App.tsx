@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppLoading from "expo-app-loading";
+
 import { Text } from "react-native";
 
 import useCachedResources from "./hooks/useCachedResources";
@@ -16,16 +17,17 @@ export default function App() {
   useEffect(() => {
     init()
       .then(() => {
+        console.log("Database initialized");
         setDbInitialized(true);
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         setDbError(error.message);
       });
   }, []);
 
-  if (!dbInitialized) {
-    return <AppLoading />;
-  }
+  // if (!dbInitialized) {
+  //   return <AppLoading />;
+  // }
 
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();

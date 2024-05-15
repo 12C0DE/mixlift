@@ -11,19 +11,32 @@ import { programs } from "../../mocks/index";
 import { AddButton, ProgramTile } from "../../components";
 import { getPrograms } from "../../db/database";
 import { styles } from "./Programs_Styles";
+import * as FileSystem from "expo-file-system";
+
+export type ProgramType = {
+  id: string;
+  name: string;
+};
 
 // Function to fetch programs from the server
 const fetchPrograms = async () => {
   // Implement your logic to fetch programs from the server
+  return new Promise((resolve, reject) => {
+    getPrograms()
+      .then((data) => resolve(data as ProgramType[]))
+      .catch((error) => reject(error));
+    // .finally(() => resolve([]));
+  });
 };
 
 export const Programs = ({ navigation }) => {
-  // export const Programs = ({ navigation }: RootTabScreenProps<"Programs">) => {
-  const [programsList, setProgramsList] = useState(programs);
+  // const [programsList, setProgramsList] = useState(programs);
+  const [programsList, setProgramsList] = useState<ProgramType[]>([]);
 
   useEffect(() => {
     // Fetch programs from the server when the component mounts
-    // fetchPrograms().then((data) => setPrograms(data));
+    fetchPrograms().then((data) => setProgramsList(data as ProgramType[]));
+    // .then((d) => console.log(d));
   }, []);
 
   const createProgram = () => {
@@ -37,10 +50,14 @@ export const Programs = ({ navigation }) => {
 
   return (
     <View>
-      {programsList.length < 1 ? (
-        <ProgramTile text="Create Program" icon="create" />
-      ) : (
+      {/* {programsList && programsList.length < 1 ? (
         <View style={styles.programContainer}>
+          <ProgramTile text="Create Program" icon="create" />
+        </View>
+      ) : ( */}
+      <View style={styles.programContainer}>
+        {/* <Text>{FileSystem.documentDirectory}</Text> */}
+        {programsList.length > 0 && (
           <FlatList
             data={programsList}
             keyExtractor={(item) => item.id.toString()}
@@ -51,11 +68,12 @@ export const Programs = ({ navigation }) => {
               <ProgramTile text={item.name} icon="fitness-center" />
             )}
           />
-          <AddButton mainAction={createProgram} />
-        </View>
-        // </ScrollView>
-      )}
-      <View style={styles.gradientArea} />
+        )}
+        <AddButton mainAction={createProgram} />
+      </View>
+      {/* // </ScrollView> */}
+      {/* // )} */}
+      {/* <View style={styles.gradientArea} /> */}
     </View>
   );
 };

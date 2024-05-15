@@ -55,7 +55,7 @@ export const CreateProgram = ({ navigation }) => {
 
   const saveWorkout = () => {
     //?what about the workout just created?
-    insertProgram("NAME OF WORKOUT");
+    insertProgram(programName);
 
     setSavedWO(true);
   };
@@ -157,7 +157,7 @@ export const CreateProgram = ({ navigation }) => {
           />
         </TouchableOpacity>
       </View>
-      <Button title="Save" onPress={() => saveWorkout()} />
+      <Button title="Save" onPress={saveWorkout} />
       {savedWO && (
         <ProgramsModal
           savedWO={savedWO}
